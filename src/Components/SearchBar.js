@@ -71,7 +71,7 @@ export default class SearchBar extends Component {
                 <ToastContainer
                 hideProgressBar={true}
                 newestOnTop={true}
-                autoClose={2000}
+                autoClose={3000}
                 />
             </div>
            
@@ -119,7 +119,7 @@ class ResultPanel extends Component {
         document.execCommand('copy')
         textField.remove()
         // alert('Copied to Clipboard');
-        toast.warn('URL copied to clipboard!');
+        toast.success('URL copied to clipboard!');
     }
     render(){
         return(
@@ -134,7 +134,7 @@ class ResultPanel extends Component {
                             {/* <Button color="primary pull-right">Copy clone link</Button>  */}
                             {/* <span className="pull-right" ><Fa title="Download as zip" icon="download" href={this.props.dLink + this.state.url + this.props.branch + this.state.zip } /></span> */}
                             
-                            <span className="pull-left" ><Fa title="Copy Clone link" icon="file" onClick={() => this.copyToClipboard(this.props.clone_url)} /></span>
+                            <span className="pull-left" ><Fa style={{ color: '#0062cc' }} title="Copy Clone link" icon="file" onClick={() => this.copyToClipboard(this.props.clone_url)} /></span>
 
                             <Button title="Download as zip" size="sm" color="primary pull-right" href={this.props.dLink + this.state.url + this.props.branch + this.state.zip }><Fa title="Download as zip" icon="download" /></Button> 
                             
