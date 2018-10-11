@@ -51,10 +51,11 @@ export default class SearchBar extends Component {
             <div>
                 <Input label="Type any Github Username" onChange={this.handleChange} group type="text" />
                 {/* <Input label="Type your password" icon="lock" group type="password" /> */}
+                <Button color="danger" onClick={this.handleSubmit} >{this.state.searchButton} <Fa icon="search" /></Button>
+
                 <Avatar
                     data={this.state.userData}
                 />
-                <Button color="danger" onClick={this.handleSubmit} >{this.state.searchButton} <Fa icon="search" /></Button>
                 <PanelBoard 
                     data={this.state.reposData}
                 />
