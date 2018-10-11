@@ -8,7 +8,8 @@
 
 # production
 
-
+/public
+/src
 #ide
 .vscode
 

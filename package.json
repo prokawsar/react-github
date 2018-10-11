@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "author": "prokawsar",
+  "homepage": "http://prokawsar.github.io/react-github",
   "dependencies": {
     "axios": "^0.18.0",
     "mdbreact": "^4.8.1",
@@ -17,12 +18,17 @@
     "build-git": "react-scripts build && mv build docs",
     "test": "react-scripts test --env=jsdom",
     "toolbox": "react-toolbox-themr",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "gh-pages": "^2.0.1"
+  }
 }
