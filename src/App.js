@@ -3,10 +3,19 @@ import SearchBar from './Components/SearchBar'
 import Header from './Components/Header'
 import './App.css';
 
-import { Button, Card, CardBody, CardImage, CardTitle, CardText } from 'mdbreact';
+import ResultPanel from './Components/ResultPanel';
 
 
 class App extends Component {
+  constructor(props){
+    super(props)
+
+    this.state = {
+      data: {}
+    }
+  }
+
+
   render() {
     return (
       <div className="App">
