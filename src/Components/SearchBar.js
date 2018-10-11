@@ -71,7 +71,6 @@ class PanelBoard extends Component {
               branch={repo.default_branch}
               dLink={repo.html_url}
             />
-            // console.log(repo.name)
           ));
 
           return(
