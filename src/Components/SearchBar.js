@@ -109,7 +109,8 @@ class ResultPanel extends Component {
         textField.select()
         document.execCommand('copy')
         textField.remove()
-        alert('Copied to Clipboard');
+        // alert('Copied to Clipboard');
+        toast.warn('URL copied to clipboard!');
     }
     render(){
         return(
