@@ -102,6 +102,15 @@ class ResultPanel extends Component {
         url: '/archive/',
         zip: '.zip'
     }
+    copyToClipboard = (data) => {
+        let textField = document.createElement('textarea')
+        textField.innerText = data;
+        document.body.appendChild(textField)
+        textField.select()
+        document.execCommand('copy')
+        textField.remove()
+        alert('Copied to Clipboard');
+    }
     render(){
         return(
             <div>
@@ -115,7 +124,7 @@ class ResultPanel extends Component {
                             {/* <Button color="primary pull-right">Copy clone link</Button>  */}
                             {/* <span className="pull-right" ><Fa title="Download as zip" icon="download" href={this.props.dLink + this.state.url + this.props.branch + this.state.zip } /></span> */}
                             
-                            <span className="pull-left" ><Fa title="Copy Clone link" icon="file" href={this.props.clone_url } /></span>
+                            <span className="pull-left" ><Fa title="Copy Clone link" icon="file" onClick={() => this.copyToClipboard(this.props.clone_url)} /></span>
 
                             <Button title="Download as zip" size="sm" color="primary pull-right" href={this.props.dLink + this.state.url + this.props.branch + this.state.zip }><Fa title="Download as zip" icon="download" /></Button> 
                             
