@@ -30,14 +30,19 @@ export default class SearchBar extends Component {
                 reposData: response.data
             })
         })
-        
-    
     }
+
+    onKeyDown = (e) => {
+        if (e.keyCode === 13 && e.shiftKey === false) {
+          e.preventDefault();
+          this.handleSubmit();
+        }
+      }
 
     render(){
         return(
             <div>
-                <Input label="Type any Github Username" onChange={this.handleChange} group type="text" />
+                <Input label="Type any Github Username" onKeyDown={this.onKeyDown} onChange={this.handleChange} group type="text" />
                 {/* <Input label="Type your password" icon="lock" group type="password" /> */}
                 <Button color="danger" onClick={this.handleSubmit} >Search <Fa icon="search" /></Button>
                 <PanelBoard 
