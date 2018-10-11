@@ -59,10 +59,12 @@ export default class SearchBar extends Component {
             <div>
                 <Input label="Type any Github Username"  onKeyDown={this.onKeyDown} onChange={this.handleChange} group type="text" />
                 {/* <Input label="Type your password" icon="lock" group type="password" /> */}
+
+                <Button color="danger" onClick={this.handleSubmit} >{this.state.searchButton} <Fa icon="search" /></Button>
+
                 <Avatar
                     data={this.state.userData}
                 />
-                <Button color="danger" onClick={this.handleSubmit} >{this.state.searchButton} <Fa icon="search" /></Button>
                 <PanelBoard 
                     data={this.state.reposData}
                 />
@@ -109,6 +111,16 @@ class ResultPanel extends Component {
         url: '/archive/',
         zip: '.zip'
     }
+    copyToClipboard = (data) => {
+        let textField = document.createElement('textarea')
+        textField.innerText = data;
+        document.body.appendChild(textField)
+        textField.select()
+        document.execCommand('copy')
+        textField.remove()
+        // alert('Copied to Clipboard');
+        toast.warn('URL copied to clipboard!');
+    }
     render(){
         return(
             <div>
@@ -122,7 +134,7 @@ class ResultPanel extends Component {
                             {/* <Button color="primary pull-right">Copy clone link</Button>  */}
                             {/* <span className="pull-right" ><Fa title="Download as zip" icon="download" href={this.props.dLink + this.state.url + this.props.branch + this.state.zip } /></span> */}
                             
-                            <span className="pull-left" ><Fa title="Copy Clone link" icon="file" href={this.props.clone_url } /></span>
+                            <span className="pull-left" ><Fa title="Copy Clone link" icon="file" onClick={() => this.copyToClipboard(this.props.clone_url)} /></span>
 
                             <Button title="Download as zip" size="sm" color="primary pull-right" href={this.props.dLink + this.state.url + this.props.branch + this.state.zip }><Fa title="Download as zip" icon="download" /></Button> 
                             
