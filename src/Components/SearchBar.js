@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import { Button, Input, Fa } from 'mdbreact';
-import { Card, CardBody, CardTitle, CardText } from 'mdbreact';
+import { Card, CardBody, CardTitle, CardText, ToastContainer, toast } from 'mdbreact';
 
 export default class SearchBar extends Component {
     constructor(props){
@@ -10,27 +10,18 @@ export default class SearchBar extends Component {
 
         this.state = {
             userName: '',
-            reposData: []
+            reposData: [],
+            userData: [],
+            searchButton: 'Search',
         }
+        
     }
-
     handleChange = (e) =>{
         this.setState({
             userName: e.target.value
         })
     }
 
-    handleSubmit = (e) => {
-        console.log("Submitted");
-        axios.get('https://api.github.com/users/'+this.state.userName+'/repos')
-        .then((response) =>{
-            console.log(response.data);
-
-            this.setState({
-                reposData: response.data
-            })
-        })
-    }
 
     onKeyDown = (e) => {
         if (e.keyCode === 13 && e.shiftKey === false) {
@@ -39,16 +30,47 @@ export default class SearchBar extends Component {
         }
       }
 
+    handleSubmit = (e) => {
+        console.log("Submitted");
+        if(this.state.userName === ''){
+            toast.warn('Please enter a username');
+            return;
+        }
+        this.setState({
+            searchButton: 'Searching...'
+        });
+        let getData = [];
+        getData.push(axios.get('https://api.github.com/users/'+this.state.userName+'/repos'));
+        getData.push(axios.get('https://api.github.com/users/'+this.state.userName));
+
+        Promise.all(getData)
+        .then(result=>{
+            this.setState({
+                reposData: result[0].data,
+                userData: result[1].data,
+                searchButton: 'Search'
+            });
+            console.log(this.state)
+        });
+    }
+
     render(){
         return(
             <div>
-                <Input label="Type any Github Username" onKeyDown={this.onKeyDown} onChange={this.handleChange} group type="text" />
+                <Input label="Type any Github Username"  onKeyDown={this.onKeyDown} onChange={this.handleChange} group type="text" />
                 {/* <Input label="Type your password" icon="lock" group type="password" /> */}
-                <Button color="danger" onClick={this.handleSubmit} >Search <Fa icon="search" /></Button>
+                <Avatar
+                    data={this.state.userData}
+                />
+                <Button color="danger" onClick={this.handleSubmit} >{this.state.searchButton} <Fa icon="search" /></Button>
                 <PanelBoard 
                     data={this.state.reposData}
                 />
-
+                <ToastContainer
+                hideProgressBar={true}
+                newestOnTop={true}
+                autoClose={2000}
+                />
             </div>
            
         );
@@ -71,6 +93,7 @@ class PanelBoard extends Component {
               branch={repo.default_branch}
               dLink={repo.html_url}
             />
+            // console.log(repo.name)
           ));
 
           return(
@@ -112,6 +135,20 @@ class ResultPanel extends Component {
                 </Card>
             </div>
            
+        );
+    }
+}
+
+class Avatar extends Component {
+    render() {
+        const avatar= this.props.data ? this.props.data : null;
+
+        return (
+            avatar && 
+            <div>
+                <img className="gitAvatar" src={avatar.avatar_url} />
+                <div><strong>{avatar.name}</strong></div>
+            </div>
         );
     }
 }
