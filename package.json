@@ -1,0 +1,30 @@
+{
+  "name": "react-app",
+  "version": "0.1.0",
+  "private": true,
+  "author": "prokawsar",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "mdbreact": "^4.8.1",
+    "react": "^16.5.2",
+    "react-css-themr": "^2.1.2",
+    "react-dom": "^16.5.2",
+    "react-scripts": "^2.0.4",
+    "react-toolbox": "^2.0.0-beta.13",
+    "react-toolbox-themr": "^1.0.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "build-git": "react-scripts build && mv build docs",
+    "test": "react-scripts test --env=jsdom",
+    "toolbox": "react-toolbox-themr",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
