@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import ResultPanel from './ResultPanel';
+import Avatar from './Avatar';
 
-import { Button, Input, Fa } from 'mdbreact';
-import { Card, CardBody, CardTitle, CardText, ToastContainer, toast } from 'mdbreact';
+import { Button, Input, Fa, ToastContainer, toast } from 'mdbreact';
 
 export default class SearchBar extends Component {
     constructor(props){
@@ -39,6 +40,7 @@ export default class SearchBar extends Component {
         this.setState({
             searchButton: 'Searching...'
         });
+
         let getData = [];
         getData.push(axios.get('https://api.github.com/users/'+this.state.userName+'/repos'));
         getData.push(axios.get('https://api.github.com/users/'+this.state.userName));
@@ -69,9 +71,9 @@ export default class SearchBar extends Component {
                     data={this.state.reposData}
                 />
                 <ToastContainer
-                hideProgressBar={true}
-                newestOnTop={true}
-                autoClose={3000}
+                    hideProgressBar={true}
+                    newestOnTop={true}
+                    autoClose={3000}
                 />
             </div>
            
@@ -105,63 +107,3 @@ class PanelBoard extends Component {
           );
     }
 }
-
-class ResultPanel extends Component {
-    state = {
-        url: '/archive/',
-        zip: '.zip'
-    }
-    copyToClipboard = (data) => {
-        let textField = document.createElement('textarea')
-        textField.innerText = data;
-        document.body.appendChild(textField)
-        textField.select()
-        document.execCommand('copy')
-        textField.remove()
-        // alert('Copied to Clipboard');
-        toast.success('URL copied to clipboard!');
-    }
-    render(){
-        return(
-            <div>
-                <Card>
-                    <CardBody>
-                        <CardTitle>
-                            <a 
-                            title="View on Github" 
-                            href={this.props.dLink} target="_blank"> {this.props.name} <span><Fa icon="github" title="View on Github"/></span>
-                            </a>  
-                            {/* <Button color="primary pull-right">Copy clone link</Button>  */}
-                            {/* <span className="pull-right" ><Fa title="Download as zip" icon="download" href={this.props.dLink + this.state.url + this.props.branch + this.state.zip } /></span> */}
-                            
-                            <span className="pull-left" ><Fa style={{ color: '#0062cc' }} title="Copy Clone link" icon="file" onClick={() => this.copyToClipboard(this.props.clone_url)} /></span>
-
-                            <Button title="Download as zip" size="sm" color="primary pull-right" href={this.props.dLink + this.state.url + this.props.branch + this.state.zip }><Fa title="Download as zip" icon="download" /></Button> 
-                            
-                        </CardTitle>
-                        <CardText>{this.props.description}</CardText>
-                        <CardText><span className="pull-left">Language: {this.props.lang} </span></CardText>
-                        <CardText><span className="pull-right">Forks: {this.props.forks} </span></CardText>
-                       
-                    </CardBody>
-                </Card>
-            </div>
-           
-        );
-    }
-}
-
-class Avatar extends Component {
-    render() {
-        const avatar= this.props.data ? this.props.data : null;
-
-        return (
-            avatar && 
-            <div>
-                <img className="gitAvatar" src={avatar.avatar_url} />
-                <div><strong>{avatar.name}</strong></div>
-            </div>
-        );
-    }
-}
-// export default Timer;
