@@ -15,7 +15,7 @@ export default class SearchBar extends Component {
             userData: [],
             searchButton: 'Search',
         }
-        
+
     }
     handleChange = (e) =>{
         this.setState({
@@ -53,6 +53,17 @@ export default class SearchBar extends Component {
                 searchButton: 'Search'
             });
             console.log(this.state)
+        }).catch(error=>{
+            if(error.response){
+                if(error.response.status === 404) {
+                    toast.warn('Username not found');
+                    this.setState({
+                        reposData: [],
+                        userData: [],
+                        searchButton: 'Search'
+                    });
+                }
+            }
         });
     }
 
@@ -67,7 +78,7 @@ export default class SearchBar extends Component {
                 <Avatar
                     data={this.state.userData}
                 />
-                <PanelBoard 
+                <PanelBoard
                     data={this.state.reposData}
                 />
                 <ToastContainer
@@ -76,16 +87,16 @@ export default class SearchBar extends Component {
                     autoClose={3000}
                 />
             </div>
-           
+
         );
     }
 }
 
 class PanelBoard extends Component {
-  
+
     render(){
         const repos = this.props.data.map((repo) => (
-            
+
             <ResultPanel
               id={repo.id}
               key={repo.id}
