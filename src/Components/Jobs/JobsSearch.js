@@ -41,9 +41,12 @@ export default class JobsSearch extends Component {
         });
 
         let getData = [];
-        getData.push(axios.get('https://jobs.github.com/positions.json?description='+this.state.search));
+        getData.push(axios.get('https://jobs.github.com/positions.json?description='+this.state.search), {
+            // to allow CORS in the client side
+            dataType: 'jsonp'
+        });
         // getData.push(axios.get('https://api.github.com/users/'+this.state.userName));
-
+ª
         Promise.all(getData)
         .then(result=>{
             this.setState({
