@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import jsonpAdapter from 'axios-jsonp';
 import JobsPanel from './JobsPanel';
 
 import { Button, Input, Fa, ToastContainer, toast } from 'mdbreact';
@@ -41,19 +42,15 @@ export default class JobsSearch extends Component {
         });
 
         let getData = [];
-        getData.push(axios.get('https://jobs.github.com/positions.json?description='+this.state.search), {
+        axios.get('https://jobs.github.com/positions.json?description='+this.state.search, {
             // to allow CORS in the client side
-            dataType: 'jsonp'
-        });
-        // getData.push(axios.get('https://api.github.com/users/'+this.state.userName));
-ª
-        Promise.all(getData)
-        .then(result=>{
+            adapter: jsonpAdapter,
+            headers: {"Access-Control-Allow-Origin": 'https://jobs.github.com'}
+        }).then(result=> {
             this.setState({
-                jobsData: result[0].data,
-                searchButton: 'Search'
+                jobsData: result.data,
+                searchButton: 'Search Job'
             });
-            console.log(this.state)
         }).catch(error=>{
             if(error.response){
                 if(error.response.status === 404) {
@@ -65,7 +62,7 @@ export default class JobsSearch extends Component {
                 }
             }
         });
-    }
+    };
 
     render(){
         return(

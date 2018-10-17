@@ -6,6 +6,7 @@
   "homepage": "https://prokawsar.github.io/react-github",
   "dependencies": {
     "axios": "^0.18.0",
+    "axios-jsonp": "^1.0.2",
     "gh-pages": "^2.0.1",
     "mdbreact": "^4.8.1",
     "moment": "^2.22.2",
