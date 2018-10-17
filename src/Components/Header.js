@@ -9,12 +9,12 @@ class Header extends Component {
         <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
             <h1 className="App-title">
-                <Link to="/">
+                <Link to="/react-github/">
                     <span style={{color: "white"}} className="pull-left" >Home</span>
                 </Link>
                  Welcome to Github App
                  
-                <Link to="/jobs/">
+                <Link to="/react-github/jobs/">
                     <span style={{color: "white"}} className="pull-right" >Jobs</span>
                 </Link>
             </h1>

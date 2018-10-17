@@ -17,10 +17,10 @@ class App extends Component {
               <div className="col-md-2"></div>
               <div className="col-md-8">
 
-                  <Route exact path="/" component={SearchBar} />
+                  <Route exact path="/react-github/" component={SearchBar} />
                   {/* <SearchBar /> */}
 
-                  <Route exact path="/jobs/" component={Jobs} />
+                  <Route exact path="/react-github/jobs/" component={Jobs} />
               </div>
             </div>
           </div>
