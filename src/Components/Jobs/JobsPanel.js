@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import Moment from 'react-moment';
+import moment from 'moment'
 
 import { Card, CardBody, CardTitle, CardText, Fa } from 'mdbreact';
 
 class JobsPanel extends Component {
-    
-    
+
+
     render(){
+
         return(
             <div>
                 <Card>
@@ -14,7 +15,7 @@ class JobsPanel extends Component {
                         <CardTitle className="pull-left">
                             <a href={this.props.url}
                             title="View on Github" target="_blank" rel="noopener noreferrer"> {this.props.title} <span><Fa icon="github" title="View on Github"/></span>
-                            </a>  
+                            </a>
                             <CardText>
                                 <span style={{color: "purple"}} className="pull-left">{this.props.company}</span>
                             </CardText>
@@ -27,13 +28,12 @@ class JobsPanel extends Component {
                         </CardText>
 
                         <CardText>
-                            <span className="pull-right">Posted: <Moment fromNow>{this.props.created} </Moment></span>
+                            <span className="pull-right">Posted:{moment(this.props.created).format('MMM D, YYYY')} &nbsp;</span>
                         </CardText>
-                       
                     </CardBody>
                 </Card>
             </div>
-           
+
         );
     }
 }
