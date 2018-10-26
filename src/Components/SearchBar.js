@@ -38,7 +38,7 @@ export default class SearchBar extends Component {
             return;
         }
         this.setState({
-            searchButton: 'Searching...'
+            searchButton: 'Searching'
         });
 
         let getData = [];
@@ -68,12 +68,20 @@ export default class SearchBar extends Component {
     }
 
     render(){
+        let SearchIcon;
+
+        if(this.state.searchButton == "Search"){
+            SearchIcon = <Fa icon="search"/>;
+        }else{
+            SearchIcon = <Fa icon="spinner" spin/>;
+        }
+
         return(
             <div>
                 <Input label="Type any Github Username"  onKeyDown={this.onKeyDown} onChange={this.handleChange} group type="text" />
                 {/* <Input label="Type your password" icon="lock" group type="password" /> */}
 
-                <Button color="danger" onClick={this.handleSubmit} >{this.state.searchButton} <Fa icon="search" /></Button>
+                <Button color="danger" onClick={this.handleSubmit} >{this.state.searchButton} {SearchIcon} </Button>
 
                 <Avatar
                     data={this.state.userData}

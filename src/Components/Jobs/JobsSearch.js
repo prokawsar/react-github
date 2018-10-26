@@ -38,7 +38,7 @@ export default class JobsSearch extends Component {
             return;
         }
         this.setState({
-            searchButton: 'Searching...'
+            searchButton: 'Searching'
         });
 
         let getData = [];
@@ -65,12 +65,19 @@ export default class JobsSearch extends Component {
     };
 
     render(){
+        let SearchIcon;
+
+        if(this.state.searchButton == "Search Job"){
+            SearchIcon = <Fa icon="search"/>;
+        }else{
+            SearchIcon = <Fa icon="spinner" spin/>;
+        }
         return(
             <div>
                 <Input label="Type any language name"  onKeyDown={this.onKeyDown} onChange={this.handleChange} group type="text" />
                 {/* <Input label="Type your password" icon="lock" group type="password" /> */}
 
-                <Button color="danger" onClick={this.handleSubmit} >{this.state.searchButton} <Fa icon="search" /></Button>
+                <Button color="danger" onClick={this.handleSubmit} >{this.state.searchButton} &nbsp; {SearchIcon} </Button>
 
                 <PanelBoard
                     data={this.state.jobsData}
